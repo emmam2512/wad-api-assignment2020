@@ -82,5 +82,28 @@ router.get('/:userName/favourites', (req, res, next) => {
     user => res.status(201).json(user.favourites)
   ).catch(next);
 });
+router.get('/:userName/favourites', (req, res, next) => {
+  const userName = req.params.userName;
+  User.findByUserName(userName).populate('favourites').then(
+    user => res.status(201).json(user.favourites)
+  ).catch(next);
+});
+
+router.post('/:userName/favourites', async (req, res, next) => {
+  const newFavourite = req.body.id;
+  const userName = req.params.userName;
+  const movie = await movieModel.findByMovieDBId(newFavourite);
+  const user = await User.findByUserName(userName);
+  if (user.favourites.indexOf(movie._id) == -1) {
+    await user.favourites.push(movie._id);
+    await user.save();
+    res.status(201).json(user).catch(next);
+
+} else {
+    res.status(401).json({
+        code: 401,
+        msg: 'Duplicate Movie Error'
+    });
+}});
 
 export default router;

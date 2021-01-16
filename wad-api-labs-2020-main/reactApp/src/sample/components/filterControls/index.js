@@ -26,7 +26,7 @@ const FilterControls = props => {
             placeholder="Title Search"
             onChange={handleTextChange}
           />
-          <span>Genre:</span>
+          {/* <span>Genre:</span>
           <select id="genre" onChange={handleGenreChange}>
             {context.genres.map(genre => {
               return (
@@ -35,7 +35,7 @@ const FilterControls = props => {
                 </option>
               );
             })}
-          </select>
+          </select> */}
         </h4>
       </div>
     </div>

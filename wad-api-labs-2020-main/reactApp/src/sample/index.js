@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch, Link } from "react-router-dom";
-import { PublicPage, Movies, Profile } from "./pages";
+import { PublicPage, Profile } from "./pages";
 import HomePage from '../sample/pages/homePage'
+import Movies from '../sample/pages/movieDetailsPage'
+import Favourites from "../sample/pages/favoritesMoviesPage"
 import Upcoming from '../sample/pages/upcomingMoviesPage'
 import TopRated from '../sample/pages/topRatedMoviesPage'
 import LoginPage from "./loginPage";
@@ -20,23 +22,11 @@ const App = () => {
       <AuthProvider>
         <AuthHeader />
         <ul>
+          <p>
+            Movies
+          </p>
           <li>
             <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/public">Public</Link>
-          </li>
-          <li>
-            <Link to="/">Movies</Link>
-          </li>
-          <li>
-            <Link to="/upcoming">Upcoming Movies</Link>
-          </li>
-          <li>
-            <Link to="/toprated">Top Rated movies</Link>
-          </li>
-          <li>
-            <Link to="/profile">Profile</Link>
           </li>
         </ul>
         <MovieProvider>
@@ -46,9 +36,10 @@ const App = () => {
             <Route path="/login" component={LoginPage} />
             <Route path="/signup" component={SignUpPage} />,
             <Route exact path="/" component={HomePage} />
-            <PrivateRoute path="/movies" component={Movies} />
+            <PrivateRoute path="/favourites" component={Favourites} />
             <PrivateRoute path="/upcoming" component={Upcoming} />
             <PrivateRoute path="/toprated" component={TopRated} />
+            <PrivateRoute path="/movies/:id" component={Movies} />
             <PrivateRoute path="/profile" component={Profile} />
             <Redirect from="*" to="/" />
            </Switch>

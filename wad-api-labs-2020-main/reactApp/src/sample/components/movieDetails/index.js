@@ -21,7 +21,7 @@ export default ({ movie }) => {
         </li>
       </ul>
 
-      <ul className="list-group list-group-horizontal">
+      {/* <ul className="list-group list-group-horizontal">
         <li key="gh" className="list-group-item list-group-item-dark">
           Genres
         </li>
@@ -40,8 +40,8 @@ export default ({ movie }) => {
             {lang.name}
           </li>
         ))}
-      </ul>
-      <ul className="list-group list-group-horizontal">
+      </ul> */}
+      {/* <ul className="list-group list-group-horizontal">
         <li key="pch" className="list-group-item list-group-item-dark">
           Production Companies
         </li>
@@ -60,7 +60,7 @@ export default ({ movie }) => {
             {pc.name}
           </li>
         ))}
-      </ul>
+      </ul> */}
     </>
   );
 };

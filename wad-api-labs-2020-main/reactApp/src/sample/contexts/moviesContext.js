@@ -5,6 +5,16 @@ export const MoviesContext = createContext(null);
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "add-favourite":
+      return {
+        movies: state.movies.map((m) =>
+          m.id === action.payload.movie.id ? { ...m, favourite: true } : m
+        ),
+        upcoming: [...state.upcoming],
+        toprated: [...state.toprated]
+
+      };
+
     case "load":
       return { movies: action.payload.movies, upcoming: [...state.upcoming],toprated:[...state.toprated]};
       case "load-upcoming":
@@ -18,7 +28,12 @@ const reducer = (state, action) => {
 
 const MoviesContextProvider = props => {
   const [state, dispatch] = useReducer(reducer, { movies: [], upcoming:[], toprated: [] });
-  const [authenticated, setAuthenticated] = useState(false);
+ 
+  const addToFavourites = (movieId) => {
+    const index = state.movies.map((m) => m.id).indexOf(movieId);
+    dispatch({ type: "add-favourite", payload: { movie: state.movies[index] } });
+  };
+
 
   useEffect(() => {
     getMovies().then(movies => {
@@ -47,7 +62,7 @@ const MoviesContextProvider = props => {
         movies: state.movies,
         upcoming: state.upcoming,
         toprated: state.toprated,
-        setAuthenticated
+        addToFavourites: addToFavourites,
       }}
     >
       {props.children}
