@@ -45,6 +45,15 @@ export const getMovies = () => {
     }
     ).then(res => res.json());
   };
+  export const getMovie = id => {
+    return fetch(
+      `/api/movies/${id}`,{headers: {
+         'Authorization': window.localStorage.getItem('token')
+      }
+    }
+    ).then(res => res.json());
+  };
+
   export const getGenres = () => {
     return fetch(
        '/api/genres',{headers: {
